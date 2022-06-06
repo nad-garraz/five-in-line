@@ -4,8 +4,9 @@
 struct Gameplay {
   public:
     Gameplay();
-    int validRow(int jugadaCol, char plays[100][100]);
+    int validRow(int jugadaCol, char plays[15][15]);
     int playCol();
+    bool isWinner(char plays[15][15]);
   private:
 
 };

@@ -8,13 +8,12 @@ Gameplay::Gameplay(){
 
 };
 
-int Gameplay::validRow(int playedCol, char plays[100][100]) {
+int Gameplay::validRow(int playedCol, char plays[15][15]) {
   int validRow{};
   while ( plays[validRow][playedCol] == ' ' ) {
     ++validRow;
-    cout << "FLAG" << endl;
   };
-  return validRow;
+  return validRow - 1;
 }
 
 int Gameplay::playCol() {
@@ -23,4 +22,8 @@ int Gameplay::playCol() {
   cout << endl;
   cin >> col;
   return col - 1; // So in starts at 1
+}
+
+bool Gameplay::isWinner(char plays[15][15]){
+  return false;
 }
