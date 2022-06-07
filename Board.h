@@ -1,18 +1,21 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+struct Board {
+public:
+  Board();
+  int getRows();
+  int getColumns();
+  int getWinningNumber();
 
-struct Board{
-  public:
-    Board();
-    int getRows();
-    int getColumns();
+  void setWinningNumber(int winningNumber);
+  void printBoard(char plays[15][15], int rows, int cols);
+  void printBoardBase();
 
-    void printBoard(char plays[15][15], int rows, int cols);
-    void printBoardBase();
-  private:
-    int _rows;
-    int _columns;
+private:
+  int _rows;
+  int _columns;
+  int _winningNumber;
 };
 
 #endif

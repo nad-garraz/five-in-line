@@ -8,6 +8,7 @@ using namespace std;
 class Player {
   public:
     Player();
+    Player( int a );
     Player(string name, char token);
     void printName();
     string getName();

@@ -5,8 +5,17 @@
 
 using namespace std;
 
-Player::Player() {
-      cout << "Player's name: ";
+Player::Player() {}
+
+Player::Player(int a) {
+ switch ( a ) {
+   case ( 1 ) : {
+   cout << "First player's name: ";
+   }; break;
+   case ( 2 ) : {
+     cout << "Second player's name: ";
+   }; break;
+ }
       cin >> _name;
       cout << "\nWelcome " << _name << "\nChoose your token: ";
       cin >> _token;
