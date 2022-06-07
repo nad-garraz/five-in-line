@@ -2,14 +2,14 @@
 #include <string>
 
 #include "Board.h"
-#include "Player.h"
 #include "Gameplay.h"
+#include "Player.h"
 
 using namespace std;
 
 int main() {
 
-//Players
+  // Players
   Player Player1;
   Player Player2;
 
@@ -20,6 +20,7 @@ int main() {
   int cols = Tablero.getColumns();
 
   char plays[15][15];
+
   // Initialize plays
   for (int i{}; i < rows; ++i) {
     for (int j{}; j < cols; ++j) {
@@ -30,23 +31,34 @@ int main() {
   char token = Player1.getToken();
   int playedCol{};
   int validRow{};
+
+  Tablero.printBoard(plays, rows, cols);
   while ( ! isDone ) {
     // Shows the play in board
-    Tablero.printBoard(plays, rows, cols);
 
-    // Ask which columns
-    playedCol = Game.playCol();
+    while (true) {
+      // Ask which columns
+      playedCol = Game.playCol();
 
-    // Assign the value of the columns to plays
-    validRow = Game.validRow(playedCol, plays);
+      // Assign the value of the columns to plays
+      validRow = Game.validRow(playedCol, plays, rows);
+      if (validRow >= 0) {
+        break;
+      } else {
+        cout << "Columna llena! " << endl;
+        ;
+      }
+    }
+
     plays[validRow][playedCol] = token;
 
-    //Changes the player token for next turn
-    token = ( Player1.getToken() == token ) ? Player2.getToken() : Player1.getToken();
-    // isDone = Gameplay.isWinner(plays);
-
+    // Changes the player token for next turn
+    token =
+        (Player1.getToken() == token) ? Player2.getToken() : Player1.getToken();
+    isDone = Game.isWinner(plays, validRow, playedCol, rows, cols);
+    Tablero.printBoard(plays, rows, cols);
   }
-
+  cout << "Salió"<< endl;
 
   return 0;
 }
