@@ -10,7 +10,8 @@ public:
 
   void setWinningNumber(int winningNumber);
   void printBoard(char plays[15][15], int rows, int cols);
-  void printBoardBase();
+  void printSpaces();
+  void printSeparationLines(int rows, int cols, int row);
 
 private:
   int _rows;

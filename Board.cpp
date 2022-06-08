@@ -21,10 +21,11 @@ in the "column % 4 == 1"nth place.
 void Board::printBoard(char plays[15][15], int rows, int cols) {
   for (int row{}; row < rows; ++row) {
 
+    printSpaces();
+
     cout << "||";
 
     for (int col{}; col < cols * 4; ++col) {
-
       if (col % 4 == 3) {
         cout << "|";
       } else if (col % 4 == 1) {
@@ -38,8 +39,8 @@ void Board::printBoard(char plays[15][15], int rows, int cols) {
 
     cout << "|";
 
-    if (row + 1 < rows) {
-      cout << endl << "||";
+    if ( row + 1 < rows ) {
+      cout << "\n        ||";
       for (int col{}; col < cols * 4 - 1; ++col) {
         cout << "-";
       }
@@ -49,7 +50,7 @@ void Board::printBoard(char plays[15][15], int rows, int cols) {
   cout << endl;
 }
 
-void Board::printBoardBase() {}
+void Board::printSpaces() { cout << "        "; }
 
 int Board::getRows() { return _rows; }
 

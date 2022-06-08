@@ -35,6 +35,7 @@ int main() {
   int validRow{};
 
   Tablero.printBoard(plays, rows, cols);
+
   while ( ! isDone ) {
     // Shows the play in board
 
