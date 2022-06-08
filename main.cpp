@@ -12,7 +12,7 @@ int main() {
   // Players
   Player Player1(1);
   Player Player2(2);
-  Player currentPlayer;
+  Player CurrentPlayer;
 
   Board Tablero;
   Gameplay Game;
@@ -31,43 +31,38 @@ int main() {
   }
 
   bool isDone = false;
-  currentPlayer = Player1;
+  CurrentPlayer = Player1;
   // Initialize token;
-  char token = currentPlayer.getToken();
+  char token = CurrentPlayer.getToken();
   int playedCol{};
   int validRow{};
 
   Tablero.printBoard(plays, rows, cols);
 
-  while ( ! isDone ) {
+  while (!isDone) {
     // Shows the play in board
 
     while (true) {
       // Ask which columns
-      playedCol = Game.playCol(currentPlayer);
+      playedCol = Game.playCol(CurrentPlayer);
 
-    // Changes the player token for next turn
-    if ( Player1.getToken() == currentPlayer.getToken() ) {
-        currentPlayer = Player2;
-    } else{
-      currentPlayer = Player1;
-    }
       // Assign the value of the columns to plays
       validRow = Game.validRow(playedCol, plays, rows);
       if (validRow >= 0) {
         break;
       } else {
         cout << "Full column! Choose another " << endl;
-        ;
       }
     }
-    token = currentPlayer.getToken();
+    token = CurrentPlayer.getToken();
     plays[validRow][playedCol] = token;
     Tablero.printBoard(plays, rows, cols);
-    isDone = Game.isWinner(plays, validRow, playedCol, rows, cols, winningNumber);
+    isDone =
+    Game.isWinner(plays, validRow, playedCol, rows, cols, winningNumber);
+    Game.turns(Player1, Player2, CurrentPlayer, token, isDone);
 
   }
-  cout << "\n***The Winner is " << currentPlayer.getName() << "*** " << endl;
+  cout << "\n***The Winner is " << CurrentPlayer.getName() << "*** " << endl;
 
   return 0;
 }
