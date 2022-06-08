@@ -12,6 +12,7 @@ int main() {
   // Players
   Player Player1(1);
   Player Player2(2);
+  Player currentPlayer;
 
   Board Tablero;
   Gameplay Game;
@@ -30,7 +31,9 @@ int main() {
   }
 
   bool isDone = false;
-  char token = Player1.getToken();
+  currentPlayer = Player1;
+  // Initialize token;
+  char token = currentPlayer.getToken();
   int playedCol{};
   int validRow{};
 
@@ -43,25 +46,28 @@ int main() {
       // Ask which columns
       playedCol = Game.playCol();
 
+    // Changes the player token for next turn
+    if ( Player1.getToken() == currentPlayer.getToken() ) {
+        currentPlayer = Player2;
+    } else{
+      currentPlayer = Player1;
+    }
       // Assign the value of the columns to plays
       validRow = Game.validRow(playedCol, plays, rows);
       if (validRow >= 0) {
         break;
       } else {
-        cout << "Columna llena! " << endl;
+        cout << "Full column! Choose another " << endl;
         ;
       }
     }
-
+    token = currentPlayer.getToken();
     plays[validRow][playedCol] = token;
-
-    // Changes the player token for next turn
-    token =
-        (Player1.getToken() == token) ? Player2.getToken() : Player1.getToken();
-    isDone = Game.isWinner(plays, validRow, playedCol, rows, cols, winningNumber);
     Tablero.printBoard(plays, rows, cols);
+    isDone = Game.isWinner(plays, validRow, playedCol, rows, cols, winningNumber);
+
   }
-  cout << "Salió"<< endl;
+  cout << "\n***The Winner is " << currentPlayer.getName() << endl;
 
   return 0;
 }
