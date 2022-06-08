@@ -17,11 +17,11 @@ int Gameplay::validRow(int playedCol, char plays[15][15], int rows) {
   return validRow;
 }
 
-int Gameplay::playCol() {
+int Gameplay::playCol(Player currentPlayer) {
   int col{};
-  cout << "Play column?: ";
-  cout << endl;
+  cout << currentPlayer.getName() << "'s turn. Choose column: ";
   cin >> col;
+  cout << endl;
   --col; // Zero base calculations for columns in array
   return col;
 }
@@ -46,7 +46,6 @@ bool Gameplay::isWinner(char plays[15][15], int validRow, int playedCol,
     }
   }// Horizontal check from left to right
   if (playedCol + winningNumber - 1 <= cols) {
-        cout << "l r" << endl;
     count = 1;
     for (int i{1}; i < winningNumber; i++) {
       if (plays[validRow][playedCol] == plays[validRow][playedCol + i]) {
@@ -59,12 +58,10 @@ bool Gameplay::isWinner(char plays[15][15], int validRow, int playedCol,
     }
   }// Horizontal check from right to left
   if (playedCol - (winningNumber - 1) >= 0) {
-        cout << "r l" << endl;
     count = 1;
     for (int i{1}; i < winningNumber; i++) {
       if (plays[validRow][playedCol] == plays[validRow][playedCol - i]) {
         count++;
-        cout << count << endl;
         if (count == winningNumber)
           return true;
       } else {
@@ -73,12 +70,10 @@ bool Gameplay::isWinner(char plays[15][15], int validRow, int playedCol,
     }
   }// Diagonal check from  upperright to lowerleft
   if (playedCol - (winningNumber - 2) >= 0 && validRow + winningNumber <= rows) {
-        cout << "ur ll" << endl;
     count = 1;
     for (int i{1}; i < winningNumber; i++) {
       if (plays[validRow][playedCol] == plays[validRow + i][playedCol - i]) {
         count++;
-        cout << count << endl;
         if ( count == winningNumber ) return true;
       } else {
         break;
@@ -86,12 +81,10 @@ bool Gameplay::isWinner(char plays[15][15], int validRow, int playedCol,
     }
   }// Diagonal check from  upperleft to lowerright
   if (playedCol + (winningNumber - 1) <= cols && validRow + winningNumber <= rows) {
-        cout << "ul lr" << endl;
     count = 1;
     for (int i{1}; i < winningNumber; i++) {
       if (plays[validRow][playedCol] == plays[validRow + i][playedCol + i]) {
         count++;
-        cout << count << endl;
         if (count == winningNumber ) return true;
       } else {
         break;
@@ -99,12 +92,10 @@ bool Gameplay::isWinner(char plays[15][15], int validRow, int playedCol,
     }
   }// Diagonal check from  lowerright to upperleft
   if (playedCol - (winningNumber - 1) >= 0 && validRow + winningNumber >= 0) {
-        cout << "lr ul" << endl;
     count = 1;
     for (int i{1}; i < winningNumber; i++) {
       if (plays[validRow][playedCol] == plays[validRow - i][playedCol - i]) {
         count++;
-        cout << count << endl;
         if (count == winningNumber)
           return true;
       } else {
@@ -113,12 +104,10 @@ bool Gameplay::isWinner(char plays[15][15], int validRow, int playedCol,
     }
   }// Diagonal check from  lowerleft to upperright
   if (playedCol + (winningNumber - 1) <= cols && validRow + winningNumber >= 0) {
-        cout << "ll ur" << endl;
     count = 1;
     for (int i{1}; i < winningNumber; i++) {
       if (plays[validRow][playedCol] == plays[validRow - i][playedCol + i]) {
         count++;
-        cout << count << endl;
         if (count == winningNumber)
           return true;
       } else {

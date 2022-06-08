@@ -17,7 +17,8 @@ Player::Player(int a) {
    }; break;
  }
       cin >> _name;
-      cout << "\nWelcome " << _name << "\nChoose your token: ";
+      cout << endl;
+      cout << "Choose your token, " << _name << ":";
       cin >> _token;
 }
 

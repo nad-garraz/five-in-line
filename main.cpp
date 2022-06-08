@@ -44,7 +44,7 @@ int main() {
 
     while (true) {
       // Ask which columns
-      playedCol = Game.playCol();
+      playedCol = Game.playCol(currentPlayer);
 
     // Changes the player token for next turn
     if ( Player1.getToken() == currentPlayer.getToken() ) {
@@ -67,7 +67,7 @@ int main() {
     isDone = Game.isWinner(plays, validRow, playedCol, rows, cols, winningNumber);
 
   }
-  cout << "\n***The Winner is " << currentPlayer.getName() << endl;
+  cout << "\n***The Winner is " << currentPlayer.getName() << "*** " << endl;
 
   return 0;
 }

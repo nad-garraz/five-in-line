@@ -5,13 +5,15 @@
 using namespace std;
 
 Board::Board() {
-  cout << "First we set the size of the board: " << endl;
   cout << "How many rows on board?: ";
   cin >> _rows;
-  cout << "How many columns?: " << endl;
+  cout << endl;
+  cout << "How many columns?: ";
   cin >> _columns;
-  cout << "Number to win?: " << endl;
+  cout << endl;
+  cout << "Number to win?: ";
   cin >> _winningNumber;
+  cout << endl;
 }
 
 /*
