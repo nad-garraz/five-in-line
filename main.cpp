@@ -24,8 +24,8 @@ int main() {
   // Max size of board
   char plays[15][15];
   // Initialize plays
-  for (int i{}; i < rows; ++i) {
-    for (int j{}; j < cols; ++j) {
+  for (int i{1}; i <= rows; ++i) {
+    for (int j{1}; j <= cols; ++j) {
       plays[i][j] = ' ';
     }
   }
@@ -48,7 +48,7 @@ int main() {
 
       // Assign the value of the columns to plays
       validRow = Game.validRow(playedCol, plays, rows);
-      if (validRow >= 0) {
+      if (validRow <= rows) {
         break;
       } else {
         cout << "Full column! Choose another " << endl;

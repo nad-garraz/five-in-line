@@ -4,9 +4,9 @@
 struct Board {
 public:
   Board();
-  int getRows();
-  int getColumns();
-  int getWinningNumber();
+  int getRows() { return _rows; }
+  int getColumns() { return _columns; }
+  int getWinningNumber() { return _winningNumber; }
 
   void setWinningNumber(int winningNumber);
   void printBoard(char plays[15][15], int rows, int cols);

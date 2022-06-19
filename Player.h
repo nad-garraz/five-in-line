@@ -11,8 +11,9 @@ class Player {
     Player( int a );
     Player(string name, char token);
     void printName();
-    string getName();
-    char getToken();
+
+    string getName() { return _name;}
+    char getToken() {return _token;}
 
   private:
     string _name;

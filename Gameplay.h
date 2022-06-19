@@ -4,6 +4,7 @@
 #include "Player.h"
 
 struct Gameplay {
+
 public:
   Gameplay();
   int validRow(int jugadaCol, char plays[15][15], int rows);

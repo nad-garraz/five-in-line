@@ -17,21 +17,13 @@ Player::Player(int a) {
    }; break;
  }
       cin >> _name;
-      cout << "Choose your token, " << _name << ":";
+      cout << "Choose your token, " << _name << ": ";
       cin >> _token;
 }
 
 Player::Player(string name, char token) {
   _name = name;
   _token = token;
-}
-
-string Player::getName() {
-  return _name;
-}
-
-char Player::getToken() {
-  return _token;
 }
 
 void Player::printName() {

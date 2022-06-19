@@ -20,11 +20,12 @@ void Gameplay::turns(Player &Player1, Player &Player2, Player &CurrentPlayer, ch
 }
 
 int Gameplay::validRow(int playedCol, char plays[15][15], int rows) {
-  int validRow{};
-  while (plays[validRow][playedCol] == ' ' and validRow < rows) {
-    ++validRow;
+  int validRow{rows};
+  if (plays[validRow][playedCol] != ' ') { cout << "Noup, columna llena" << endl; }
+  while (plays[validRow][playedCol] == ' ' and validRow > 0) {
+    --validRow;
   };
-  --validRow;
+  ++validRow;
   return validRow;
 }
 
@@ -33,14 +34,13 @@ int Gameplay::playCol(Player currentPlayer) {
   cout << currentPlayer.getName() << "'s turn. Choose column: ";
   cin >> col;
   cout << endl;
-  --col; // Zero base calculations for columns in array
   return col;
 }
 
 // If last user inputs makes "winningNumber" in line return true to cut the game loop.
 // For calculations:
-// playedCol starts at ZERO
-// validRow  starts at ZERO
+// playedCol starts at one
+// validRow  starts at one??
 bool Gameplay::isWinner(char plays[15][15], int validRow, int playedCol,
                         int rows, int cols, int winningNumber) {
   int count{};
@@ -55,7 +55,8 @@ bool Gameplay::isWinner(char plays[15][15], int validRow, int playedCol,
         break;
       }
     }
-  }// Horizontal check from left to right
+  }
+  // Horizontal check from left to right
   if (playedCol + winningNumber - 1 <= cols) {
     count = 1;
     for (int i{1}; i < winningNumber; i++) {
@@ -67,7 +68,8 @@ bool Gameplay::isWinner(char plays[15][15], int validRow, int playedCol,
         break;
       }
     }
-  }// Horizontal check from right to left
+  }
+  // Horizontal check from right to left
   if (playedCol - (winningNumber - 1) >= 0) {
     count = 1;
     for (int i{1}; i < winningNumber; i++) {
@@ -79,53 +81,51 @@ bool Gameplay::isWinner(char plays[15][15], int validRow, int playedCol,
         break;
       }
     }
-  }// Diagonal check from  upperright to lowerleft
-  if (playedCol - (winningNumber - 2) >= 0 && validRow + winningNumber <= rows) {
+
+  }
+// Diagonal check  "\"
     count = 1;
-    for (int i{1}; i < winningNumber; i++) {
-      if (plays[validRow][playedCol] == plays[validRow + i][playedCol - i]) {
+    bool notToLeft = true;
+    bool notToRight = true;
+    for (int i{1}; i <= winningNumber; i++) {
+      if (plays[validRow][playedCol] == plays[validRow + i][playedCol - i] && notToLeft) {
+        count++;
+
+        if ( count == winningNumber ) return true;
+
+      }
+      else {
+        notToLeft = false;
+      }
+
+      if (plays[validRow][playedCol] == plays[validRow - i][playedCol + i] && notToRight) {
         count++;
         if ( count == winningNumber ) return true;
-      } else {
-        break;
+      } 
+      else {
+        notToRight = false;
       }
-    }
-  }// Diagonal check from  upperleft to lowerright
-  if (playedCol + (winningNumber - 1) <= cols && validRow + winningNumber <= rows) {
-    count = 1;
-    for (int i{1}; i < winningNumber; i++) {
-      if (plays[validRow][playedCol] == plays[validRow + i][playedCol + i]) {
-        count++;
-        if (count == winningNumber ) return true;
-      } else {
-        break;
-      }
-    }
-  }// Diagonal check from  lowerright to upperleft
-  if (playedCol - (winningNumber - 1) >= 0 && validRow + winningNumber >= 0) {
-    count = 1;
-    for (int i{1}; i < winningNumber; i++) {
-      if (plays[validRow][playedCol] == plays[validRow - i][playedCol - i]) {
-        count++;
-        if (count == winningNumber)
-          return true;
-      } else {
-        break;
-      }
-    }
-  }// Diagonal check from  lowerleft to upperright
-  if (playedCol + (winningNumber - 1) <= cols && validRow + winningNumber >= 0) {
-    count = 1;
-    for (int i{1}; i < winningNumber; i++) {
-      if (plays[validRow][playedCol] == plays[validRow - i][playedCol + i]) {
-        count++;
-        if (count == winningNumber)
-          return true;
-      } else {
-        break;
-      }
-    }
   }
+  // Diagonal check  "/"
+    count = 1;
+    notToLeft = true;
+    notToRight = true;
+    for (int i{1}; i <= winningNumber; i++) {
+      if (plays[validRow][playedCol] == plays[validRow + i][playedCol + i] && notToRight) {
+        count++;
+        if ( count == winningNumber ) return true;
+      }
+      else {
+        notToRight = false;
+      }
 
+      if (plays[validRow][playedCol] == plays[validRow - i][playedCol - i] && notToLeft) {
+        count++;
+        if ( count == winningNumber ) return true;
+      } 
+      else {
+        notToLeft = false;
+      }
+  }
   return false;
 }
