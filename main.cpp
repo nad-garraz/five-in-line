@@ -8,39 +8,38 @@
 
 using namespace std;
 
-
-void clrscr(){cout << "\033[2J\033[1;1H";}
+void clrscr() { cout << "\033[2J\033[1;1H"; }
 
 int main() {
 
   char ans;
-  char tokens[10];  //Array to store token. Up to 10 players
+  char tokens[10]; // Array to store token. Up to 10 players
   vector<Player> players{};
 
   // Players
-  for ( int i{1}; i <= 10; ++i){
-    switch (i){
-      case(1) : {
-        players.push_back(Player(i, tokens));
-      }; break;
-      case(2) : {
-        players.push_back(Player(i, tokens));
-      }; break;
-      default : {
-          players.push_back(Player(i, tokens));
-      }; break;
+  for (int i{1}; i <= 10; ++i) {
+    switch (i) {
+    case (1): {
+      players.push_back(Player(i, tokens));
+    }; break;
+    case (2): {
+      players.push_back(Player(i, tokens));
+    }; break;
+    default: {
+      players.push_back(Player(i, tokens));
+    }; break;
     }
-    if ( i >= 2) {
+    if (i >= 2) {
       cout << "Add another player? [y/n]: ";
       cin >> ans;
       if (ans == 'n') {
-      break;
+        break;
       }
     }
   }
- 
+
   int turn = 1;
-  Player CurrentPlayer = players[0];  //jugador del turno, inicia el 1st player
+  Player CurrentPlayer = players[0]; // jugador del turno, inicia el 1st player
 
   Board Tablero;
   Gameplay Game;
@@ -49,9 +48,7 @@ int main() {
   int cols = Tablero.getColumns();
   int winningNumber = Tablero.getWinningNumber();
 
-  // Max size of board
-  char plays[15][15];
-  // Initialize plays
+  char plays[15][15]; // Max size of board
   for (int i{1}; i <= rows; ++i) {
     for (int j{1}; j <= cols; ++j) {
       plays[i][j] = ' ';
@@ -61,13 +58,13 @@ int main() {
   bool isDone = false;
 
   // Initialize token;
-  char token = CurrentPlayer.getToken();
+  char token{' '};
   int playedCol{};
   int validRow{};
   clrscr();
   Tablero.printBoard(plays, rows, cols);
 
-  while (! isDone) {
+  while (!isDone) {
     // Shows the play in the board
 
     while (true) {
@@ -87,12 +84,18 @@ int main() {
     clrscr();
     Tablero.printBoard(plays, rows, cols);
 
-    isDone = Game.isWinner(plays, validRow, playedCol, rows, cols, winningNumber);  // isDone == true --> bye
+    isDone = Game.isTie(turn, cols, rows) or Game.isWinner(plays, validRow, playedCol, rows, cols,
+                           winningNumber); // isDone == true --> bye
 
-    if (!isDone) Game.turns(turn, CurrentPlayer, players); //passing by reference all players changes CurrentPlayer
-
+    if (!isDone)
+      Game.turns(
+          turn, CurrentPlayer,
+          players); // passing by reference all players changes CurrentPlayer
   }
-  cout << "\n***The Winner is " << CurrentPlayer.getName() << "*** " << endl;
-
+  if (turn == rows * cols) {
+    cout << "\n*** It is a tie game ***" << endl;
+  } else {
+    cout << "\n***The Winner is " << CurrentPlayer.getName() << "*** " << endl;
+  }
   return 0;
 }

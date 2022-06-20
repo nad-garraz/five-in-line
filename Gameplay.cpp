@@ -39,6 +39,10 @@ int Gameplay::playCol(Player currentPlayer) {
 // For calculations:
 // playedCol starts at one
 // validRow  starts at one??
+bool Gameplay::isTie(int turn, int cols, int rows){
+  return (turn == cols * rows) ? true : false;
+}
+
 bool Gameplay::isWinner(char plays[15][15], int validRow, int playedCol,
                         int rows, int cols, int winningNumber) {
   int count{};
