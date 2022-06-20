@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 #include "Gameplay.h"
 #include "Player.h"
@@ -10,13 +11,10 @@ Gameplay::Gameplay(){
 };
 
 
-void Gameplay::turns(Player &Player1, Player &Player2, Player &CurrentPlayer, char token, bool isDone) {
-    // Changes the player token for next turn if no winner yet
-    if (Player1.getToken() == token and ! isDone) {
-      CurrentPlayer = Player2;
-    } else {
-      CurrentPlayer = Player1;
-    }
+void Gameplay::turns(int &turns, Player &CurrentPlayer, vector<Player> players) {
+  int next_player = turns % players.size();
+  CurrentPlayer = players[next_player];
+  turns++;
 }
 
 int Gameplay::validRow(int playedCol, char plays[15][15], int rows) {

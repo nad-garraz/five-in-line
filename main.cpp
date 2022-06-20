@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "Board.h"
 #include "Gameplay.h"
@@ -7,12 +8,39 @@
 
 using namespace std;
 
+
+void clrscr(){cout << "\033[2J\033[1;1H";}
+
 int main() {
 
+  char ans;
+  char tokens[10];  //Array to store token. Up to 10 players
+  vector<Player> players{};
+
   // Players
-  Player Player1(1);
-  Player Player2(2);
-  Player CurrentPlayer;
+  for ( int i{1}; i <= 10; ++i){
+    switch (i){
+      case(1) : {
+        players.push_back(Player(i, tokens));
+      }; break;
+      case(2) : {
+        players.push_back(Player(i, tokens));
+      }; break;
+      default : {
+          players.push_back(Player(i, tokens));
+      }; break;
+    }
+    if ( i >= 2) {
+      cout << "Add another player? [y/n]: ";
+      cin >> ans;
+      if (ans == 'n') {
+      break;
+      }
+    }
+  }
+ 
+  int turn = 1;
+  Player CurrentPlayer = players[0];  //jugador del turno, inicia el 1st player
 
   Board Tablero;
   Gameplay Game;
@@ -31,16 +59,16 @@ int main() {
   }
 
   bool isDone = false;
-  CurrentPlayer = Player1;
+
   // Initialize token;
   char token = CurrentPlayer.getToken();
   int playedCol{};
   int validRow{};
-
+  clrscr();
   Tablero.printBoard(plays, rows, cols);
 
-  while (!isDone) {
-    // Shows the play in board
+  while (! isDone) {
+    // Shows the play in the board
 
     while (true) {
       // Ask which columns
@@ -56,10 +84,12 @@ int main() {
     }
     token = CurrentPlayer.getToken();
     plays[validRow][playedCol] = token;
+    clrscr();
     Tablero.printBoard(plays, rows, cols);
-    isDone =
-    Game.isWinner(plays, validRow, playedCol, rows, cols, winningNumber);
-    Game.turns(Player1, Player2, CurrentPlayer, token, isDone);
+
+    isDone = Game.isWinner(plays, validRow, playedCol, rows, cols, winningNumber);  // isDone == true --> bye
+
+    if (!isDone) Game.turns(turn, CurrentPlayer, players); //passing by reference all players changes CurrentPlayer
 
   }
   cout << "\n***The Winner is " << CurrentPlayer.getName() << "*** " << endl;
