@@ -1,6 +1,8 @@
 #include <iostream>
 
 #include "welcomeScreen.h"
+#include "Board.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -14,4 +16,26 @@ void print_title() {
 
 void print_menu(){
 cout << "        TODO menu" << endl;
+}
+
+
+void gameOver(Player CurrentPlayer, int rows, int cols, int turn){
+  if (turn ==  rows * cols) {
+    cout << "\n*** It is a tie game ***" << endl;
+  } else {
+    cout << "\n***The Winner is " << CurrentPlayer.getName() << "*** " << endl;
+  }
+
+}
+
+bool playAgain() {
+  char ans;
+  cout << "What to play again?: [Y/n]: ";
+  cin >> ans;
+  cout << endl;
+  if ( ans != 'n' ) {
+    return false;
+  } else {
+    return true;
+  } 
 }
