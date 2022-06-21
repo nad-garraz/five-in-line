@@ -47,61 +47,55 @@ bool Gameplay::isWinner(char plays[15][15], int validRow, int playedCol,
                         int rows, int cols, int winningNumber) {
   int count{};
   // Vertical check downwards
-  if (validRow + winningNumber <= rows) {
     count = 1;
-    for (int i{1}; i < winningNumber; i++) {
-      if (plays[validRow][playedCol] == plays[validRow + i][playedCol]) {
-        count++;
+    for (int i{1}; i <= winningNumber; i++) {
+      if (plays[validRow][playedCol] == plays[validRow - i][playedCol]) {
+        ++count;
         if (count == winningNumber ) return true;
-      } else {
+      } 
+      else {
         break;
       }
     }
-  }
-  // Horizontal check from left to right
-  if (playedCol + winningNumber - 1 <= cols) {
-    count = 1;
-    for (int i{1}; i < winningNumber; i++) {
-      if (plays[validRow][playedCol] == plays[validRow][playedCol + i]) {
-        count++;
-        if (count == winningNumber)
-          return true;
-      } else {
-        break;
-      }
-    }
-  }
-  // Horizontal check from right to left
-  if (playedCol - (winningNumber - 1) >= 0) {
-    count = 1;
-    for (int i{1}; i < winningNumber; i++) {
-      if (plays[validRow][playedCol] == plays[validRow][playedCol - i]) {
-        count++;
-        if (count == winningNumber)
-          return true;
-      } else {
-        break;
-      }
-    }
-
-  }
-// Diagonal check  "\"
+  
+  // Horizontal check 
     count = 1;
     bool notToLeft = true;
     bool notToRight = true;
     for (int i{1}; i <= winningNumber; i++) {
+      if (plays[validRow][playedCol] == plays[validRow][playedCol - i] && notToLeft) {
+        ++count;
+        if (count == winningNumber) return true;
+      } 
+      else {
+        notToLeft = false;
+        break;
+      }
+
+      if (plays[validRow][playedCol] == plays[validRow][playedCol + i] && notToRight) {
+        ++count;
+        if (count == winningNumber) return true;
+      } else {
+        notToRight = false;
+        break;
+      }
+    }
+
+// Diagonal check  "\"
+    count = 1;
+    notToLeft = true;
+    notToRight = true;
+    for (int i{1}; i <= winningNumber; i++) {
       if (plays[validRow][playedCol] == plays[validRow + i][playedCol - i] && notToLeft) {
-        count++;
-
+        ++count;
         if ( count == winningNumber ) return true;
-
       }
       else {
         notToLeft = false;
       }
 
       if (plays[validRow][playedCol] == plays[validRow - i][playedCol + i] && notToRight) {
-        count++;
+        ++count;
         if ( count == winningNumber ) return true;
       } 
       else {
@@ -114,7 +108,7 @@ bool Gameplay::isWinner(char plays[15][15], int validRow, int playedCol,
     notToRight = true;
     for (int i{1}; i <= winningNumber; i++) {
       if (plays[validRow][playedCol] == plays[validRow + i][playedCol + i] && notToRight) {
-        count++;
+        ++count;
         if ( count == winningNumber ) return true;
       }
       else {
@@ -122,7 +116,7 @@ bool Gameplay::isWinner(char plays[15][15], int validRow, int playedCol,
       }
 
       if (plays[validRow][playedCol] == plays[validRow - i][playedCol - i] && notToLeft) {
-        count++;
+        ++count;
         if ( count == winningNumber ) return true;
       } 
       else {

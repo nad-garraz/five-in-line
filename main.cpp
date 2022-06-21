@@ -5,12 +5,15 @@
 #include "Board.h"
 #include "Gameplay.h"
 #include "Player.h"
+#include "welcomeScreen.h"
 
 using namespace std;
 
 void clrscr() { cout << "\033[2J\033[1;1H"; }
 
 int main() {
+  print_title();
+  print_menu();
 
   char ans;
   char tokens[10]; // Array to store token. Up to 10 players
@@ -57,8 +60,8 @@ int main() {
 
   bool isDone = false;
 
-  // Initialize token;
-  char token{' '};
+  
+  char token{' '};  // Initialize token;
   int playedCol{};
   int validRow{};
   clrscr();
