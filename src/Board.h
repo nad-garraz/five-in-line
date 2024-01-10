@@ -2,6 +2,16 @@
 #define BOARD_H
 
 #include "Player.h"
+#include "Gameplay.h"
+#include "welcomeScreen.h"
+
+
+#include <iostream>
+#include <vector>
+
+
+using namespace std;
+
 
 struct Board {
 public:

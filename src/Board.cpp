@@ -2,9 +2,6 @@
 #include <vector>
 
 #include "Board.h"
-#include "Player.h"
-#include "Gameplay.h"
-#include "welcomeScreen.h"
 
 using namespace std;
 

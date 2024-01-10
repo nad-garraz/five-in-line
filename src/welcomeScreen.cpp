@@ -1,8 +1,6 @@
 #include <iostream>
 
 #include "welcomeScreen.h"
-#include "Board.h"
-#include "Player.h"
 
 using namespace std;
 

@@ -1,20 +1,16 @@
-#include <iostream>
-#include <string>
-#include <vector>
-
 #include "Board.h"
-#include "Gameplay.h"
-#include "Player.h"
 #include "welcomeScreen.h"
 
 using namespace std;
 
-int main() {
+int main()
+{
   print_title();
   print_menu();
   bool isDone = false;
 
-  while (!isDone) {
+  while (!isDone)
+  {
     Board Tablero;
     Tablero.playGame();
     // After GameLoop
