@@ -3,8 +3,6 @@
 
 #include "Board.h"
 
-using namespace std;
-
 void clrscr() { cout << "\033[2J\033[1;1H"; }
 
 // Get info on size and rules

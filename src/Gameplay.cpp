@@ -3,8 +3,6 @@
 
 #include "Gameplay.h"
 
-using namespace std;
-
 Gameplay::Gameplay(){
 
 };
