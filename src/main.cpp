@@ -1,8 +1,6 @@
 #include "Board.h"
 #include "welcomeScreen.h"
 
-// using namespace std;
-
 int main()
 {
   print_title();

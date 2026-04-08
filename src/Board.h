@@ -10,9 +10,6 @@
 #include <vector>
 
 
-using namespace std;
-
-
 struct Board {
 public:
   Board();
